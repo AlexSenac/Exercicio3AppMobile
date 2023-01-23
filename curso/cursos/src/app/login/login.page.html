@@ -1,0 +1,219 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons>
+      <ion-menu-button> </ion-menu-button>
+      <ion-title>Login</ion-title>
+      <ion-icon name="lock-closed" class="ion-padding-end"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="upper">
+    <div class="icon">
+      <ion-icon name="people-circle-outline"></ion-icon>
+    </div>
+    <p id="login">Alunos</p>
+  </div>
+  <div class="middle">
+    <div class="box">
+      <form
+        [formGroup]="aulaFormGroup"
+        #aulaFormGroupDirective="ngForm"
+        (ngSubmit)="registrar(aulaFormGroup.value)"
+      >
+        <ion-item>
+          <ion-label position="floating"> Usuário: </ion-label>
+          <ion-input
+            (keyup)="verificaUsername()"
+            inputmode="text"
+            type="username"
+            placeholder=" Enter username"
+            formControlName="username"
+            id="username"
+            required
+          >
+          </ion-input>
+          <ion-item *ngIf="!validaUserName" color="danger">
+            usuário já existe
+          </ion-item>
+          <ion-icon
+            class="ion-align-self-center"
+            slot="end"
+            name="person"
+          ></ion-icon>
+        </ion-item>
+        <div>
+          <ion-text color="danger-text-center">
+            <h4
+              style="
+                padding-left: 20px;
+                margin-top: 10px;
+                font-size: 13px;
+                color: #f00;
+                font-style: italic;
+              "
+            >
+              Please Write Your Username!
+            </h4>
+          </ion-text>
+        </div>
+        <ion-item>
+          <ion-label position="floating"> Email Address: </ion-label>
+          <ion-input
+            (keyup)="verificaEmail()"
+            type="email"
+            placeholder=" Enter email"
+            formControlName="email"
+            id="email"
+            inputmode="email"
+            required
+            email
+          >
+          </ion-input>
+          <ion-item *ngIf="!validaEmail" color="danger">
+            e-mail já cadastrado
+          </ion-item>
+          <ion-icon
+            class="ion-align-self-center"
+            slot="end"
+            name="mail"
+          ></ion-icon>
+        </ion-item>
+        <div>
+          <ion-text color="danger-text-center">
+            <h4
+              style="
+                padding-left: 20px;
+                margin-top: 10px;
+                font-size: 13px;
+                color: #f00;
+                font-style: italic;
+              "
+            >
+              Please Write Your Email Address!
+            </h4>
+          </ion-text>
+        </div>
+        <ion-item>
+          <ion-label position="floating"> Confirmar Email: </ion-label>
+          <ion-input
+            type="confEmail"
+            placeholder=" confirmar email"
+            formControlName="confEmail"
+            id="confEmail"
+            inputmode="email"
+            required
+            email
+          >
+          </ion-input>
+          <ion-icon
+            class="ion-align-self-center"
+            slot="end"
+            name="mail"
+          ></ion-icon>
+        </ion-item>
+        <div
+          *ngIf="aulaFormGroup.get('confEmail')?.hasError('equalsTo') && aulaFormGroup.get('confEmail')?.touched"
+        >
+          Emails não são iguais.
+        </div>
+        <div>
+          <ion-text color="danger-text-center">
+            <h4
+              style="
+                padding-left: 20px;
+                margin-top: 10px;
+                font-size: 13px;
+                color: #f00;
+                font-style: italic;
+              "
+            >
+              Please Confirm Your Email Address!
+            </h4>
+          </ion-text>
+        </div>
+        <ion-item>
+          <ion-label position="floating"> Password: </ion-label>
+          <ion-input
+            type="password"
+            placeholder=" Enter password"
+            formControlName="password"
+            id="password"
+            inputmode="password"
+            required
+          >
+          </ion-input>
+          <ion-icon
+            class="ion-align-self-center"
+            slot="end"
+            name="eye-outline"
+            (click)="changeType()"
+          ></ion-icon>
+        </ion-item>
+        <div>
+          <ion-text color="danger-text-center">
+            <h4
+              style="
+                padding-left: 20px;
+                margin-top: 10px;
+                font-size: 13px;
+                color: #f00;
+                font-style: italic;
+              "
+            >
+              Please Write Your Password Here!
+            </h4>
+          </ion-text>
+        </div>
+        <ion-item>
+          <ion-label position="floating"> Confirmar Password: </ion-label>
+          <ion-input
+            type="confPass"
+            placeholder=" Enter password"
+            formControlName="confPass"
+            id="confPass"
+            inputmode="password"
+            required
+          >
+          </ion-input>
+          <ion-icon
+            class="ion-align-self-center"
+            slot="end"
+            name="eye-outline"
+            (click)="changeType()"
+          ></ion-icon>
+        </ion-item>
+        <div
+          *ngIf="aulaFormGroup.get('confPass')?.hasError('equalsTo') && aulaFormGroup.get('confPass')?.touched"
+          style="color: red"
+        >
+          Senhas não são iguais.
+        </div>
+        <div>
+          <ion-text color="danger-text-center">
+            <h4
+              style="
+                padding-left: 20px;
+                margin-top: 10px;
+                font-size: 13px;
+                color: #f00;
+                font-style: italic;
+              "
+            >
+              Please Confirm Your Password!
+            </h4>
+          </ion-text>
+        </div>
+        <div class="btn">
+          <ion-button
+            color="danger"
+            type="submit"
+            [disabled]="!aulaFormGroup.valid"
+            >Login</ion-button
+          >
+        </div>
+      </form>
+    </div>
+  </div>
+</ion-content>

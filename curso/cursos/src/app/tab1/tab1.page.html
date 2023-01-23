@@ -1,0 +1,215 @@
+<ion-header [translucent]="true" class="ion-no-border">
+  <ion-toolbar class="new-background-color">
+    <ion-title> Novos Alunos </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-thumbnail class="user-image">
+    <img src="/assets/image/avatar1.png" alt="image" />
+  </ion-thumbnail>
+  <ion-row class="photo-wrapper">
+    <ion-button fill="clear">Add Photo</ion-button>
+  </ion-row>
+  <form
+    [formGroup]="aulaFormGroup"
+    #aulaFormGroupDirective="ngForm"
+    (ngSubmit)="createAlunos(aulaFormGroup.value)"
+  >
+    <ion-list>
+      <ion-item>
+        <ion-label position="stacked">Nome:</ion-label>
+        <ion-input
+          formControlName="nome"
+          id="nome"
+          inputmode="text" autocomplete="given-name"
+          clearInput="true"
+          required
+        ></ion-input>
+      </ion-item>
+      <div
+        *ngIf="aulaFormGroup.get('nome')?.hasError('required') && aulaFormGroup.get('nome')?.touched"
+      >
+        Campo não pode estar vazio.
+      </div>
+      <ion-item>
+        <ion-label position="stacked">CPF:</ion-label>
+        <ion-input
+          formControlName="cpf"
+          id="cpf"
+          inputmode="text"
+          clearInput="true"
+          required
+        ></ion-input>
+      </ion-item>
+      <div
+        *ngIf="aulaFormGroup.get('cpf')?.hasError('required') && aulaFormGroup.get('cpf')?.touched"
+      >
+        Campo não pode estar vazio.
+      </div>
+      <ion-item>
+        <ion-label position="stacked">Email:</ion-label>
+        <ion-input
+          formControlName="email"
+          id="email"
+          inputmode="email"
+          clearInput="true"
+          required
+          email
+        ></ion-input>
+      </ion-item>
+      <div
+        *ngIf="aulaFormGroup.get('email')?.hasError('required') && aulaFormGroup.get('email')?.touched"
+      >
+        Campo não pode estar vazio.
+      </div>
+      <ion-item>
+        <ion-label position="stacked">Username:</ion-label>
+        <ion-input
+          formControlName="username"
+          id="username"
+          inputmode="text"
+          clearInput="true"
+          required
+        ></ion-input>
+      </ion-item>
+      <div
+        *ngIf="aulaFormGroup.get('username')?.hasError('required') && aulaFormGroup.get('username')?.touched"
+      >
+        Campo não pode estar vazio.
+      </div>
+      <ion-item>
+        <ion-label position="stacked">Senha:</ion-label>
+        <ion-input
+          formControlName="senha"
+          id="senha"
+          inputmode="text"
+          clearInput="true"
+          required
+        ></ion-input>
+      </ion-item>
+      <div
+        *ngIf="aulaFormGroup.get('senha')?.hasError('required') && aulaFormGroup.get('senha')?.touched"
+      >
+        Campo não pode estar vazio.
+      </div>
+      <ion-item>
+        <ion-label position="stacked">Categoria:</ion-label>
+        <ion-select formControlName="categoria">
+          <ion-select-option value="matematica">Matemática</ion-select-option>
+          <ion-select-option value="historia">Historia</ion-select-option>
+          <ion-select-option value="portugues">Portugues</ion-select-option>
+          <ion-select-option value="geografia">Geografia</ion-select-option>
+          <ion-select-option value="ingles">Inglês</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Primeira Nota:</ion-label>
+        <ion-input
+          formControlName="primeiraNota"
+          id="primeiraNota"
+          inputmode="number"
+          clearInput="true"
+          required
+        ></ion-input>
+      </ion-item>
+      <div
+        *ngIf="aulaFormGroup.get('primeiraNota')?.hasError('required') && aulaFormGroup.get('primeiraNota')?.touched"
+      >
+        Campo não pode estar vazio.
+      </div>
+      <ion-item>
+        <ion-label position="stacked">Segunda Nota:</ion-label>
+        <ion-input
+          formControlName="segundaNota"
+          id="segundaNota"
+          inputmode="number"
+          clearInput="true"
+          required
+        ></ion-input>
+      </ion-item>
+      <div
+        *ngIf="aulaFormGroup.get('segundaNota')?.hasError('required') && aulaFormGroup.get('segundaNota')?.touched"
+      >
+        Campo não pode estar vazio.
+      </div>
+      <ion-item>
+        <ion-label position="stacked">Média Final:</ion-label>
+        <ion-input
+          formControlName="mediaFinal"
+          (click)="calcular()"
+          id="mediaFinal"
+          inputmode="number"
+          clearInput="true"
+          required
+        ></ion-input>
+      </ion-item>
+      <div
+        *ngIf="aulaFormGroup.get('mediaFinal')?.hasError('required') && aulaFormGroup.get('mediaFinal')?.touched"
+      >
+        Campo não pode estar vazio.
+      </div>
+
+      <ion-item>
+        <ion-label position="stacked">CEP:</ion-label>
+        <ion-input
+          (change)="loadEndereco()"
+          formControlName="cep"
+          id="cep"
+          inputmode="text"
+          clearInput="true"
+          required
+        ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Logradouro:</ion-label>
+        <ion-input
+          formControlName="logradouro"
+          id="logradouro"
+          inputmode="text"
+          clearInput="true"
+          required
+          readonly
+        ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Número:</ion-label>
+        <ion-input
+          formControlName="numero"
+          id="numero"
+          inputmode="number"
+          clearInput="true"
+          required
+        ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Bairro:</ion-label>
+        <ion-input
+          formControlName="bairro"
+          id="bairro"
+          inputmode="text"
+          clearInput="true"
+          required
+          readonly
+        ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Cidade:</ion-label>
+        <ion-input
+          formControlName="localidade"
+          id="localidade"
+          inputmode="text"
+          clearInput="true"
+          required
+          readonly
+        ></ion-input>
+      </ion-item>
+
+      <ion-item lines="none">
+        <ion-buttons>
+          <ion-button type="submit" [disabled]="!aulaFormGroup.valid" color="primary">Salvar</ion-button>
+        </ion-buttons>
+      </ion-item>
+    </ion-list>
+  </form>
+</ion-content>
